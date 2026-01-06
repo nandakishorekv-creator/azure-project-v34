@@ -1,4 +1,5 @@
 {
+  "name": "azure-project-v34",
   "minMuleVersion": "4.9.0",
   "secureProperties": [
     "tls.keystore.password",
