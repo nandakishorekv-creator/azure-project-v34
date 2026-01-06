@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/ee/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/salesforce ./knowledge-base/schemas/mule-salesforce.xsd">
+
+  <flow name="post-contacts-flow" doc:name="post-contacts-flow" doc:id="post-contacts-flow">
+    <ee:transform doc:name="Transform to Contact" doc:id="transform-to-contact">
+      <ee:message doc:id="doc-996caa41">
+        <ee:set-payload doc:id="doc-79a2f223" resource="dw/transform-to-contact-15.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:create type="Contact" config-ref="Salesforce_Config" doc:name="Create Contact" doc:id="create-contact"></salesforce:create>
+    <ee:transform doc:name="Transform Response" doc:id="transform-contact-response">
+      <ee:message doc:id="doc-c1e2049d">
+        <ee:set-payload doc:id="doc-2659fee0" resource="dw/transform-response-16.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="get-contacts-flow" doc:name="get-contacts-flow" doc:id="get-contacts-flow">
+    <salesforce:query config-ref="Salesforce_Config" doc:name="Query Contacts" doc:id="query-contacts">
+      <salesforce:salesforce-query doc:id="doc-3e5e6a67">
+        SELECT Id, FirstName, LastName, Email, Phone FROM Contact
+      </salesforce:salesforce-query>
+    </salesforce:query>
+    <ee:transform doc:name="Transform Response" doc:id="transform-contacts-response">
+      <ee:message doc:id="doc-302032b4">
+        <ee:set-payload doc:id="doc-4d33a332" resource="dw/transform-response-17.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="put-contacts-flow" doc:name="put-contacts-flow" doc:id="put-contacts-flow">
+    <ee:transform doc:name="Transform to Contact Update" doc:id="transform-to-contact-update">
+      <ee:message doc:id="doc-093b9d85">
+        <ee:set-payload doc:id="doc-e6c1b079" resource="dw/transform-to-contact-update-18.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:update type="Contact" config-ref="Salesforce_Config" doc:name="Update Contact" doc:id="update-contact"></salesforce:update>
+    <ee:transform doc:name="Transform Response" doc:id="transform-contact-update-response">
+      <ee:message doc:id="doc-2104402f">
+        <ee:set-payload doc:id="doc-fd30e004" resource="dw/transform-response-19.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="delete-contacts-flow" doc:name="delete-contacts-flow" doc:id="delete-contacts-flow">
+    <ee:transform doc:name="Transform to Contact ID" doc:id="transform-to-contact-id">
+      <ee:message doc:id="doc-0cd2dd6e">
+        <ee:set-payload doc:id="doc-07f425b5" resource="dw/transform-to-contact-id-20.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:delete config-ref="Salesforce_Config" doc:name="Delete Contact" doc:id="delete-contact"></salesforce:delete>
+    <ee:transform doc:name="Transform Response" doc:id="transform-contact-delete-response">
+      <ee:message doc:id="doc-bd3f0472">
+        <ee:set-payload doc:id="doc-c6490baf" resource="dw/transform-response-21.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+</mule>

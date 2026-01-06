@@ -1,0 +1,84 @@
+{
+  "projectName": "azure-project-v34",
+  "artifactId": "azure-project-v34",
+  "version": "1.0.0",
+  "description": "MuleSoft integration: azure-project-v34",
+  "endpoints": [],
+  "connectors": [
+    "secure-properties",
+    "http",
+    "tls",
+    "salesforce"
+  ],
+  "flows": [
+    {
+      "name": "post-leads-flow",
+      "type": "flow"
+    },
+    {
+      "name": "get-leads-flow",
+      "type": "flow"
+    },
+    {
+      "name": "put-leads-flow",
+      "type": "flow"
+    },
+    {
+      "name": "delete-leads-flow",
+      "type": "flow"
+    },
+    {
+      "name": "post-opportunities-flow",
+      "type": "flow"
+    },
+    {
+      "name": "get-opportunities-flow",
+      "type": "flow"
+    },
+    {
+      "name": "put-opportunities-flow",
+      "type": "flow"
+    },
+    {
+      "name": "delete-opportunities-flow",
+      "type": "flow"
+    },
+    {
+      "name": "post-contacts-flow",
+      "type": "flow"
+    },
+    {
+      "name": "get-contacts-flow",
+      "type": "flow"
+    },
+    {
+      "name": "put-contacts-flow",
+      "type": "flow"
+    },
+    {
+      "name": "delete-contacts-flow",
+      "type": "flow"
+    },
+    {
+      "name": "post-campaigns-flow",
+      "type": "flow"
+    },
+    {
+      "name": "get-campaigns-flow",
+      "type": "flow"
+    },
+    {
+      "name": "put-campaigns-flow",
+      "type": "flow"
+    },
+    {
+      "name": "delete-campaigns-flow",
+      "type": "flow"
+    }
+  ],
+  "userPrompt": "",
+  "generatedAt": "2026-01-06T06:55:20.743Z",
+  "generatorVersion": "1.0.0",
+  "hasErrorHandlers": true,
+  "hasMUnitTests": true
+}

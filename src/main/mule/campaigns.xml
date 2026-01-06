@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/ee/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/salesforce ./knowledge-base/schemas/mule-salesforce.xsd">
+
+  <flow name="post-campaigns-flow" doc:name="post-campaigns-flow" doc:id="post-campaigns-flow">
+    <ee:transform doc:name="Transform to Campaign" doc:id="transform-to-campaign">
+      <ee:message doc:id="doc-666a123f">
+        <ee:set-payload doc:id="doc-d4a27633" resource="dw/transform-to-campaign-22.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:create type="Campaign" config-ref="Salesforce_Config" doc:name="Create Campaign" doc:id="create-campaign"></salesforce:create>
+    <ee:transform doc:name="Transform Response" doc:id="transform-campaign-response">
+      <ee:message doc:id="doc-f1b4d2d0">
+        <ee:set-payload doc:id="doc-e93c0115" resource="dw/transform-response-23.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="get-campaigns-flow" doc:name="get-campaigns-flow" doc:id="get-campaigns-flow">
+    <salesforce:query config-ref="Salesforce_Config" doc:name="Query Campaigns" doc:id="query-campaigns">
+      <salesforce:salesforce-query doc:id="doc-052b1b5c">
+        SELECT Id, Name, Status, Type, StartDate FROM Campaign
+      </salesforce:salesforce-query>
+    </salesforce:query>
+    <ee:transform doc:name="Transform Response" doc:id="transform-campaigns-response">
+      <ee:message doc:id="doc-ab1aa638">
+        <ee:set-payload doc:id="doc-67ee0ade" resource="dw/transform-response-24.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="put-campaigns-flow" doc:name="put-campaigns-flow" doc:id="put-campaigns-flow">
+    <ee:transform doc:name="Transform to Campaign Update" doc:id="transform-to-campaign-update">
+      <ee:message doc:id="doc-991d1356">
+        <ee:set-payload doc:id="doc-673325c9" resource="dw/transform-to-campaign-update-25.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:update type="Campaign" config-ref="Salesforce_Config" doc:name="Update Campaign" doc:id="update-campaign"></salesforce:update>
+    <ee:transform doc:name="Transform Response" doc:id="transform-campaign-update-response">
+      <ee:message doc:id="doc-6e8ba5c5">
+        <ee:set-payload doc:id="doc-4527f8e8" resource="dw/transform-response-26.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="delete-campaigns-flow" doc:name="delete-campaigns-flow" doc:id="delete-campaigns-flow">
+    <ee:transform doc:name="Transform to Campaign ID" doc:id="transform-to-campaign-id">
+      <ee:message doc:id="doc-fc008f14">
+        <ee:set-payload doc:id="doc-0e2e16a2" resource="dw/transform-to-campaign-id-27.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:delete config-ref="Salesforce_Config" doc:name="Delete Campaign" doc:id="delete-campaign"></salesforce:delete>
+    <ee:transform doc:name="Transform Response" doc:id="transform-campaign-delete-response">
+      <ee:message doc:id="doc-e8d8a59b">
+        <ee:set-payload doc:id="doc-8622674e" resource="dw/transform-response-28.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+</mule>

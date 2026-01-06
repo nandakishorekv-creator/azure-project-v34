@@ -1,0 +1,200 @@
+#%RAML 1.0
+title: azure-project-v34
+version: v1
+baseUri: https://api.example.com/{version}
+mediaType: application/json
+
+/leads:
+  post:
+    description: "Create a new leads"
+    displayName: "Create Leads"
+    body:
+      application/json:
+        type: !include resources/schemas/PostLeadsRequest.raml
+        example: !include resources/examples/PostLeadsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostLeadsResponse.raml
+            example: !include resources/examples/PostLeadsResponse.json
+  get:
+    description: "Retrieve all leads"
+    displayName: "Get Leads"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetLeadsResponse.raml
+            example: !include resources/examples/GetLeadsResponse.json
+  put:
+    description: "Update leads collection"
+    displayName: "Update Leads"
+    body:
+      application/json:
+        type: !include resources/schemas/PutLeadsRequest.raml
+        example: !include resources/examples/PutLeadsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutLeadsResponse.raml
+            example: !include resources/examples/PutLeadsResponse.json
+  delete:
+    description: "Delete leads collection"
+    displayName: "Delete Leads"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteLeadsResponse.raml
+            example: !include resources/examples/DeleteLeadsResponse.json
+
+/opportunities:
+  post:
+    description: "Create a new opportunities"
+    displayName: "Create Opportunities"
+    body:
+      application/json:
+        type: !include resources/schemas/PostOpportunitiesRequest.raml
+        example: !include resources/examples/PostOpportunitiesRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostOpportunitiesResponse.raml
+            example: !include resources/examples/PostOpportunitiesResponse.json
+  get:
+    description: "Retrieve all opportunities"
+    displayName: "Get Opportunities"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetOpportunitiesResponse.raml
+            example: !include resources/examples/GetOpportunitiesResponse.json
+  put:
+    description: "Update opportunities collection"
+    displayName: "Update Opportunities"
+    body:
+      application/json:
+        type: !include resources/schemas/PutOpportunitiesRequest.raml
+        example: !include resources/examples/PutOpportunitiesRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutOpportunitiesResponse.raml
+            example: !include resources/examples/PutOpportunitiesResponse.json
+  delete:
+    description: "Delete opportunities collection"
+    displayName: "Delete Opportunities"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteOpportunitiesResponse.raml
+            example: !include resources/examples/DeleteOpportunitiesResponse.json
+
+/contacts:
+  post:
+    description: "Create a new contacts"
+    displayName: "Create Contacts"
+    body:
+      application/json:
+        type: !include resources/schemas/PostContactsRequest.raml
+        example: !include resources/examples/PostContactsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostContactsResponse.raml
+            example: !include resources/examples/PostContactsResponse.json
+  get:
+    description: "Retrieve all contacts"
+    displayName: "Get Contacts"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetContactsResponse.raml
+            example: !include resources/examples/GetContactsResponse.json
+  put:
+    description: "Update contacts collection"
+    displayName: "Update Contacts"
+    body:
+      application/json:
+        type: !include resources/schemas/PutContactsRequest.raml
+        example: !include resources/examples/PutContactsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutContactsResponse.raml
+            example: !include resources/examples/PutContactsResponse.json
+  delete:
+    description: "Delete contacts collection"
+    displayName: "Delete Contacts"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteContactsResponse.raml
+            example: !include resources/examples/DeleteContactsResponse.json
+
+/campaigns:
+  post:
+    description: "Create a new campaigns"
+    displayName: "Create Campaigns"
+    body:
+      application/json:
+        type: !include resources/schemas/PostCampaignsRequest.raml
+        example: !include resources/examples/PostCampaignsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PostCampaignsResponse.raml
+            example: !include resources/examples/PostCampaignsResponse.json
+  get:
+    description: "Retrieve all campaigns"
+    displayName: "Get Campaigns"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetCampaignsResponse.raml
+            example: !include resources/examples/GetCampaignsResponse.json
+  put:
+    description: "Update campaigns collection"
+    displayName: "Update Campaigns"
+    body:
+      application/json:
+        type: !include resources/schemas/PutCampaignsRequest.raml
+        example: !include resources/examples/PutCampaignsRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/PutCampaignsResponse.raml
+            example: !include resources/examples/PutCampaignsResponse.json
+  delete:
+    description: "Delete campaigns collection"
+    displayName: "Delete Campaigns"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/DeleteCampaignsResponse.raml
+            example: !include resources/examples/DeleteCampaignsResponse.json
+
+/health:
+  get:
+    description: "Retrieve all health"
+    displayName: "Get Health"
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include resources/schemas/GetHealthResponse.raml
+            example: !include resources/examples/GetHealthResponse.json

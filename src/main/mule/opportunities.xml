@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/ee/core ./knowledge-base/schemas/mule-core.xsd
+        http://www.mulesoft.org/schema/mule/salesforce ./knowledge-base/schemas/mule-salesforce.xsd">
+
+  <flow name="post-opportunities-flow" doc:name="post-opportunities-flow" doc:id="post-opportunities-flow">
+    <ee:transform doc:name="Transform to Opportunity" doc:id="transform-to-opportunity">
+      <ee:message doc:id="doc-e4f52769">
+        <ee:set-payload doc:id="doc-c7e9790f" resource="dw/transform-to-opportunity-8.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:create type="Opportunity" config-ref="Salesforce_Config" doc:name="Create Opportunity" doc:id="create-opportunity"></salesforce:create>
+    <ee:transform doc:name="Transform Response" doc:id="transform-opportunity-response">
+      <ee:message doc:id="doc-2ffd170c">
+        <ee:set-payload doc:id="doc-1a9a03d1" resource="dw/transform-response-9.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="get-opportunities-flow" doc:name="get-opportunities-flow" doc:id="get-opportunities-flow">
+    <salesforce:query config-ref="Salesforce_Config" doc:name="Query Opportunities" doc:id="query-opportunities">
+      <salesforce:salesforce-query doc:id="doc-d279007a">
+        SELECT Id, Name, StageName, CloseDate, Amount FROM Opportunity
+      </salesforce:salesforce-query>
+    </salesforce:query>
+    <ee:transform doc:name="Transform Response" doc:id="transform-opportunities-response">
+      <ee:message doc:id="doc-2d7a99bf">
+        <ee:set-payload doc:id="doc-7f63c23a" resource="dw/transform-response-10.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="put-opportunities-flow" doc:name="put-opportunities-flow" doc:id="put-opportunities-flow">
+    <ee:transform doc:name="Transform to Opportunity Update" doc:id="transform-to-opportunity-update">
+      <ee:message doc:id="doc-5602dd0a">
+        <ee:set-payload doc:id="doc-e117abfb" resource="dw/transform-to-opportunity-update-11.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:update type="Opportunity" config-ref="Salesforce_Config" doc:name="Update Opportunity" doc:id="update-opportunity"></salesforce:update>
+    <ee:transform doc:name="Transform Response" doc:id="transform-opportunity-update-response">
+      <ee:message doc:id="doc-b785e436">
+        <ee:set-payload doc:id="doc-e4c92d72" resource="dw/transform-response-12.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+  <flow name="delete-opportunities-flow" doc:name="delete-opportunities-flow" doc:id="delete-opportunities-flow">
+    <ee:transform doc:name="Transform to Opportunity ID" doc:id="transform-to-opportunity-id">
+      <ee:message doc:id="doc-9a08f930">
+        <ee:set-payload doc:id="doc-d8a13e9c" resource="dw/transform-to-opportunity-id-13.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <salesforce:delete config-ref="Salesforce_Config" doc:name="Delete Opportunity" doc:id="delete-opportunity"></salesforce:delete>
+    <ee:transform doc:name="Transform Response" doc:id="transform-opportunity-delete-response">
+      <ee:message doc:id="doc-c6aad537">
+        <ee:set-payload doc:id="doc-8a46f120" resource="dw/transform-response-14.dwl"></ee:set-payload>
+      </ee:message>
+    </ee:transform>
+    <error-handler ref="globalErrorHandler"></error-handler>
+  </flow>
+
+</mule>

@@ -1,0 +1,9 @@
+%dw 2.0
+output application/java
+---
+[{
+  LastName: payload.lastName,
+  FirstName: payload.firstName,
+  Email: payload.email,
+  Phone: payload.phone
+}]
