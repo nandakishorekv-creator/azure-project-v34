@@ -20,7 +20,7 @@
     <app.runtime>4.9.0</app.runtime>
     <mule.maven.plugin.version>4.6.0</mule.maven.plugin.version>
 
-    <!-- Safe defaults (prevent validate failure) -->
+    <!-- Safe defaults for CI -->
     <anypoint.environment>Sandbox</anypoint.environment>
     <secure.key>dummy</secure.key>
     <mule.env>dev</mule.env>
@@ -34,7 +34,7 @@
   <!-- ===================== -->
   <build>
 
-    <!-- REQUIRED for mule-application -->
+    <!-- REQUIRED for mule-application packaging -->
     <extensions>
       <extension>
         <groupId>org.mule.tools.maven</groupId>
@@ -45,15 +45,12 @@
 
     <plugins>
 
-      <!-- 🔑 THIS IS THE FIX -->
-      <!-- Mule packaging MUST be explicitly bound -->
+      <!-- 🔑 FORCE RUNTIME + PACKAGE -->
       <plugin>
         <groupId>org.mule.tools.maven</groupId>
         <artifactId>mule-maven-plugin</artifactId>
         <version>${mule.maven.plugin.version}</version>
-         <configuration>
-             <muleVersion>4.9.0</muleVersion>
-           </configuration>
+
         <executions>
           <execution>
             <id>mule-package</id>
@@ -61,6 +58,10 @@
             <goals>
               <goal>package</goal>
             </goals>
+            <configuration>
+              <!-- THIS is what actually locks runtime -->
+              <muleVersion>${app.runtime}</muleVersion>
+            </configuration>
           </execution>
         </executions>
       </plugin>
