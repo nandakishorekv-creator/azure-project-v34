@@ -51,6 +51,9 @@
         <groupId>org.mule.tools.maven</groupId>
         <artifactId>mule-maven-plugin</artifactId>
         <version>${mule.maven.plugin.version}</version>
+         <configuration>
+             <muleVersion>4.9.0</muleVersion>
+           </configuration>
         <executions>
           <execution>
             <id>mule-package</id>
