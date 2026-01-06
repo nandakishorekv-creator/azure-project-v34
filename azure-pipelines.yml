@@ -444,7 +444,7 @@ stages:
               echo ""
               
               mvn clean package \
-                -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER) \
+                -Dmule.version=4.9.0 \
                 -Dsecure.key=mule \
                 -Dmule.env=dev \
                 -DskipTests \
